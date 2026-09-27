@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mente Clara</title>
+<meta name="description" content="Proyecto de investigación IB PYP: cómo el consumo de alcohol y drogas puede afectar el aprendizaje y el desempeño académico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --paper:#F3F6F9; --surface:#FFFFFF; --surface-2:#E9EEF4; --ink:#16213A; --muted:#55617A; --line:#D6DEE8;
+  --accent:#0A7580; --accent-ink:#065860; --accent-soft:#D5EEF0;
+  --marker:#FFD24D; --marker-bg:#FFD24D; --on-marker:#16213A;
+  --blue:#3A57A8; --myth:#C8472F; --myth-soft:#FBE3DD; --real:#1F7F55; --real-soft:#DCF1E6;
+  --grid:rgba(22,33,58,.055);
+  --shadow:0 1px 2px rgba(22,33,58,.06),0 8px 24px -12px rgba(22,33,58,.18);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r:18px; --gut:clamp(16px,4vw,40px); --max:1160px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0E1421; --surface:#161F31; --surface-2:#1D2840; --ink:#E7ECF4; --muted:#9BA7BD; --line:#2A3651;
+    --accent:#3EC1CA; --accent-ink:#7AD8DE; --accent-soft:#12343B;
+    --marker:#E8C04A; --marker-bg:rgba(232,192,74,.38); --on-marker:#E7ECF4;
+    --blue:#86A0EC; --myth:#F2826B; --myth-soft:#3A1F1B; --real:#58C995; --real-soft:#15352A;
+    --grid:rgba(231,236,244,.045);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0E1421; --surface:#161F31; --surface-2:#1D2840; --ink:#E7ECF4; --muted:#9BA7BD; --line:#2A3651;
+  --accent:#3EC1CA; --accent-ink:#7AD8DE; --accent-soft:#12343B;
+  --marker:#E8C04A; --marker-bg:rgba(232,192,74,.38); --on-marker:#E7ECF4;
+  --blue:#86A0EC; --myth:#F2826B; --myth-soft:#3A1F1B; --real:#58C995; --real-soft:#15352A;
+  --grid:rgba(231,236,244,.045);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--ink); font:17px/1.6 var(--body); -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-ink)}
+a:focus-visible,button:focus-visible,input:focus-visible+label,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.015em}
+h2{font-size:clamp(2rem,4.6vw,3.1rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:700;letter-spacing:-.005em}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.hl{background:linear-gradient(transparent 58%,var(--marker-bg) 58%,var(--marker-bg) 92%,transparent 92%);color:inherit;padding-inline:.08em}
+.eyebrow{font:500 .76rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);display:flex;align-items:center;gap:.6em}
+.eyebrow b{font-weight:500;background:var(--accent);color:var(--surface);border-radius:6px;padding:.35em .5em}
+.lead{font-size:1.14rem;color:var(--muted);max-width:62ch}
+.ref{font:500 .72rem/1 var(--mono);text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);border-radius:6px;padding:.28em .45em;white-space:nowrap;vertical-align:.12em}
+.ref:hover{background:var(--accent);color:var(--surface)}
+.ico{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ---------- Nav ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.08rem var(--display);text-decoration:none;color:var(--ink);white-space:nowrap}
+.brand svg{width:30px;height:30px}
+.navlinks{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;list-style:none;padding:0;margin-block:0}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{display:block;padding:.5em .7em;border-radius:10px;text-decoration:none;color:var(--muted);font-size:.9rem;white-space:nowrap}
+.navlinks a:hover{color:var(--ink);background:var(--surface-2)}
+.navlinks a.on{color:var(--accent-ink);background:var(--accent-soft);font-weight:700}
+.menubtn{display:none;margin-left:auto;background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:.5em .8em;font:700 .9rem var(--body);cursor:pointer;align-items:center;gap:.4em}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--accent)}
+@media (max-width:1020px){
+  .menubtn{display:inline-flex}
+  .navlinks{position:absolute;top:62px;left:0;right:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--line);padding:10px var(--gut) 16px;box-shadow:var(--shadow);max-height:calc(100vh - 80px);overflow:auto}
+  .navlinks:not(.open){display:none}
+  .navlinks a{padding:.75em .8em;font-size:1rem}
+}
+
+/* ---------- Sections ---------- */
+section{padding-block:clamp(64px,9vw,112px);scroll-margin-top:62px}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,44px);max-width:760px}
+.band{background:var(--surface);border-block:1px solid var(--line)}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(56px,8vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:800;letter-spacing:-.035em;margin-block:18px 20px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{font-size:clamp(1.1rem,1.9vw,1.3rem)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:.55em;border-radius:14px;padding:.85em 1.3em;font:700 1rem var(--body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s,background .2s}
+.btn-primary{background:var(--accent);color:var(--surface)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--accent-ink)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn-ghost:hover{border-color:var(--accent)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:28px;font:500 .78rem var(--mono);color:var(--muted);letter-spacing:.04em}
+.hero-meta span{display:flex;align-items:center;gap:.5em}
+.hero-meta span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.hero-art{position:relative}
+.hero-art svg{width:100%;height:auto;display:block}
+.art-caption{font:500 .72rem var(--mono);color:var(--muted);margin-top:10px;text-align:right}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:520px}}
+
+/* ---------- Substance cards ---------- */
+.define{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:stretch;margin-bottom:28px}
+.quote-card{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:clamp(22px,3vw,34px);display:grid;gap:14px;align-content:start}
+.quote-card p{font:700 clamp(1.25rem,2.2vw,1.55rem)/1.3 var(--display)}
+.quote-card small{color:color-mix(in srgb,var(--paper) 70%,transparent);font-size:.9rem}
+.quote-card .ref{background:color-mix(in srgb,var(--paper) 16%,transparent);color:var(--paper)}
+.define-text{display:grid;gap:14px;align-content:center}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.sub{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:12px;align-content:start}
+.sub .tag{display:inline-flex;align-items:center;gap:10px}
+.sub .tag span{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink)}
+.sub p{color:var(--muted);font-size:.98rem}
+.sub .kind{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note{margin-top:22px;display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--muted);max-width:80ch}
+.note .ico{color:var(--accent);width:22px;height:22px;margin-top:2px}
+@media (max-width:980px){.cards-4{grid-template-columns:repeat(2,1fr)}.define{grid-template-columns:1fr}}
+@media (max-width:560px){.cards-4{grid-template-columns:1fr}}
+
+/* ---------- Brain ---------- */
+.brain-layout{display:grid;grid-template-columns:340px 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+.brain-fig{position:sticky;top:90px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:12px}
+.brain-fig svg{width:100%;height:auto}
+.brain-fig figcaption{font-size:.9rem;color:var(--muted)}
+.cards-brain{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.bcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start}
+.bcard .ib{grid-row:span 2;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink)}
+.bcard p{color:var(--muted);font-size:.97rem}
+.bcard .src{grid-column:2;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+.bcard.wide{grid-column:1/-1}
+@media (max-width:900px){.brain-layout{grid-template-columns:1fr}.brain-fig{position:static;max-width:460px}}
+@media (max-width:600px){.cards-brain{grid-template-columns:1fr}}
+
+/* ---------- Impact ---------- */
+.impact{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.imp{border-radius:var(--r);padding:22px;background:var(--paper);border:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.imp .top{display:flex;align-items:center;gap:12px;color:var(--accent-ink)}
+.imp p{color:var(--muted);font-size:.97rem}
+.factors{margin-top:36px;display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+.panel{border-radius:var(--r);padding:clamp(22px,3vw,30px);border:1px solid var(--line);background:var(--paper);display:grid;gap:14px;align-content:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.4em .85em;font-size:.92rem}
+.think{background:var(--ink);color:var(--paper);border:0}
+.think h3{color:var(--marker)}
+.think p{color:color-mix(in srgb,var(--paper) 82%,transparent)}
+.think .ref{background:color-mix(in srgb,var(--paper) 16%,transparent);color:var(--paper)}
+.eq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 1.05rem var(--display)}
+.eq span{background:color-mix(in srgb,var(--paper) 12%,transparent);padding:.35em .7em;border-radius:10px}
+@media (max-width:900px){.impact{grid-template-columns:repeat(2,1fr)}.factors{grid-template-columns:1fr}}
+@media (max-width:560px){.impact{grid-template-columns:1fr}}
+
+/* ---------- Evidence table ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.95rem}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.org{font-weight:700;white-space:nowrap}
+td.yr{font-family:var(--mono);font-size:.85rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.method{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:8px;align-content:start}
+.step .n{font:800 1.6rem var(--display);color:var(--accent)}
+.step p{font-size:.94rem;color:var(--muted)}
+@media (max-width:900px){.method{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.method{grid-template-columns:1fr}}
+
+/* ---------- Stats ---------- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:8px;align-content:space-between}
+.tile .big{font:800 clamp(2rem,3.6vw,2.7rem)/1 var(--display);letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums}
+.tile p{font-size:.95rem}
+.source{font:500 .74rem/1.4 var(--mono);color:var(--muted);letter-spacing:.02em}
+.source a{color:var(--accent-ink)}
+.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,28px);display:grid;gap:16px;align-content:start}
+.chart.span2{grid-column:1/-1}
+.chart h3{font-size:1.15rem}
+.chart .sub-t{color:var(--muted);font-size:.93rem;margin-top:-8px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bars{display:grid;gap:14px}
+.brow{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:12px;align-items:center}
+.brow .lbl{font-size:.92rem}
+.btrack{display:grid;gap:5px}
+.bar{position:relative;height:22px;border-radius:6px;background:var(--surface-2)}
+.bar i{position:absolute;inset:0 auto 0 0;width:calc(var(--v) / var(--max,100) * 100%);border-radius:6px;background:var(--c,var(--accent));transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.bar b{position:absolute;top:50%;transform:translateY(-50%);left:calc(var(--v) / var(--max,100) * 100% + 8px);font:500 .8rem var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.axis{display:flex;justify-content:space-between;font:500 .7rem var(--mono);color:var(--muted);margin-top:-6px}
+.waffle-wrap{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;width:min(220px,100%)}
+.waffle span{aspect-ratio:1;border-radius:4px;background:var(--surface-2);position:relative;overflow:hidden}
+.waffle span.f{background:var(--accent)}
+.waffle span.p::after{content:"";position:absolute;inset:0 30% 0 0;background:var(--accent)}
+.waffle-text .big{font:800 3rem/1 var(--display);color:var(--accent);letter-spacing:-.03em}
+.mini{display:grid;gap:10px;margin-top:6px}
+.mini .brow{grid-template-columns:70px 1fr}
+.sleep-row{display:flex;gap:10px;flex-wrap:wrap}
+.person{width:44px;height:60px;color:var(--surface-2)}
+.person.on{color:var(--accent)}
+@media (max-width:980px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:800px){.charts{grid-template-columns:1fr}}
+@media (max-width:520px){.tiles{grid-template-columns:1fr}.brow{grid-template-columns:1fr;gap:6px}.axis{padding-left:0}.waffle-wrap{grid-template-columns:1fr}}
+
+/* ---------- Protection ---------- */
+.protect{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(24px,4vw,48px);align-items:start}
+.protect-art{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;position:sticky;top:90px}
+.protect-art svg{width:100%;height:auto;display:block}
+.plist{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pitem{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;gap:8px;align-content:start}
+.pitem .top{display:flex;align-items:center;gap:12px;color:var(--real)}
+.pitem p{color:var(--muted);font-size:.95rem}
+.helpbox{grid-column:1/-1;background:var(--real-soft);border:1px solid color-mix(in srgb,var(--real) 35%,transparent);border-radius:var(--r);padding:22px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.helpbox .num{font:800 2.6rem/1 var(--display);color:var(--real);letter-spacing:-.02em;user-select:all}
+.helpbox p{font-size:.97rem}
+@media (max-width:900px){.protect{grid-template-columns:1fr}.protect-art{position:static;max-width:460px}}
+@media (max-width:560px){.plist{grid-template-columns:1fr}.helpbox{grid-template-columns:1fr}}
+
+/* ---------- Myth ---------- */
+.myths{display:grid;gap:14px}
+.myth{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,26px);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+.myth .n{font:800 1.4rem var(--display);color:var(--muted);width:2ch}
+.myth .stmt{font:700 clamp(1.05rem,2vw,1.25rem)/1.35 var(--display)}
+.myth .choices{display:flex;gap:8px}
+.choice{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:.6em 1.05em;font:700 .95rem var(--body);cursor:pointer;transition:border-color .2s,background .2s}
+.choice[data-v="mito"]:hover:not(:disabled){border-color:var(--myth)}
+.choice[data-v="realidad"]:hover:not(:disabled){border-color:var(--real)}
+.choice:disabled{cursor:default;opacity:.55}
+.choice.picked{opacity:1}
+.choice.picked[data-v="mito"]{background:var(--myth-soft);border-color:var(--myth)}
+.choice.picked[data-v="realidad"]{background:var(--real-soft);border-color:var(--real)}
+.answer{grid-column:2/-1;border-radius:14px;padding:14px 16px;font-size:.97rem;display:grid;gap:6px}
+.answer.ok{background:var(--real-soft)}
+.answer.no{background:var(--myth-soft)}
+.answer .verdict{font:800 1rem var(--display)}
+.answer.ok .verdict{color:var(--real)}
+.answer.no .verdict{color:var(--myth)}
+.myth-score{margin-top:18px;font:500 .85rem var(--mono);color:var(--muted)}
+@media (max-width:700px){.myth{grid-template-columns:auto 1fr}.myth .choices{grid-column:1/-1}.choice{flex:1}.answer{grid-column:1/-1}}
+
+/* ---------- Quiz ---------- */
+.quiz{display:grid;gap:16px;max-width:860px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,26px);display:grid;gap:14px}
+.q legend{font:700 1.1rem/1.35 var(--display);padding:0;margin-bottom:12px;display:flex;gap:12px}
+.q legend span{font:500 .8rem var(--mono);color:var(--accent-ink);background:var(--accent-soft);border-radius:8px;padding:.3em .55em;height:fit-content;margin-top:.1em}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:12px;padding:.7em .9em;cursor:pointer;font-size:.97rem;height:100%;transition:border-color .15s,background .15s}
+.opt label::before{content:"";width:16px;height:16px;border-radius:50%;border:2px solid var(--muted);flex:none}
+.opt input:checked+label{border-color:var(--accent);background:var(--accent-soft)}
+.opt input:checked+label::before{border-color:var(--accent);background:radial-gradient(var(--accent) 45%,transparent 50%)}
+.q.graded .opt label{cursor:default}
+.opt.correct label{border-color:var(--real)!important;background:var(--real-soft)!important}
+.opt.wrong label{border-color:var(--myth)!important;background:var(--myth-soft)!important}
+.explain{border-left:4px solid var(--myth);padding:4px 0 4px 14px;font-size:.95rem;color:var(--muted)}
+.explain.good{border-color:var(--real)}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.result{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:clamp(20px,3vw,28px);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.result .score{font:800 clamp(2.6rem,6vw,3.6rem)/1 var(--display);color:var(--marker);font-variant-numeric:tabular-nums}
+.result p{color:color-mix(in srgb,var(--paper) 85%,transparent)}
+.quiz-msg{color:var(--myth);font-size:.95rem}
+@media (max-width:560px){.opts{grid-template-columns:1fr}.result{grid-template-columns:1fr}}
+
+/* ---------- Reflection ---------- */
+.reflect{background:var(--ink);color:var(--paper);border-radius:28px;padding:clamp(32px,6vw,72px);display:grid;gap:24px;position:relative;overflow:hidden}
+.reflect blockquote{margin:0;font:800 clamp(1.7rem,4.4vw,3.2rem)/1.12 var(--display);letter-spacing:-.025em;max-width:22ch}
+.reflect blockquote .hl{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--marker) 55%,transparent) 60%,color-mix(in srgb,var(--marker) 55%,transparent) 92%,transparent 92%)}
+.reflect p{color:color-mix(in srgb,var(--paper) 82%,transparent);max-width:62ch;font-size:1.08rem}
+.reflect .qs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.reflect .qs div{border:1px solid color-mix(in srgb,var(--paper) 22%,transparent);border-radius:16px;padding:16px;font-size:.98rem}
+.reflect .qs b{display:block;font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--marker);margin-bottom:6px}
+.reflect svg.deco{position:absolute;right:-40px;top:-40px;width:260px;opacity:.12;color:var(--paper)}
+@media (max-width:760px){.reflect .qs{grid-template-columns:1fr}}
+
+/* ---------- Action ---------- */
+.action{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,48px);align-items:start}
+.attrs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.attr{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--paper);display:grid;gap:6px}
+.attr b{font:700 1rem var(--display);display:flex;align-items:center;gap:8px;color:var(--accent-ink)}
+.attr p{font-size:.93rem;color:var(--muted)}
+@media (max-width:860px){.action{grid-template-columns:1fr}}
+@media (max-width:480px){.attrs{grid-template-columns:1fr}}
+
+/* ---------- Sources ---------- */
+.refs{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:r}
+.refs li{counter-increment:r;display:grid;grid-template-columns:3ch 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:.95rem;scroll-margin-top:80px}
+.refs li::before{content:counter(r);font:500 .85rem var(--mono);color:var(--accent-ink)}
+.refs li:target{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.refs a{word-break:break-word}
+.credits{margin-top:26px;font-size:.9rem;color:var(--muted);max-width:80ch;display:grid;gap:8px}
+footer{padding-block:36px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* ---------- Motion ---------- */
+.reveal{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+.js .reveal.pending{transform:translateY(26px)}
+.js .reveal.pending .bar i{width:0}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.bar i,.btn{transition:none!important}
+  .pulse{animation:none}
+  .js .reveal.pending{transform:none}
+  .js .reveal.pending .bar i{width:calc(var(--v) / var(--max,100) * 100%)}
+}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<!-- Icon sprite (ilustraciones e iconos originales creados para este proyecto) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-glass" viewBox="0 0 24 24"><path d="M7 3h10l-1 8a4 4 0 0 1-8 0L7 3z"/><path d="M12 15v6M8.5 21h7M7.4 7h9.2"/></symbol>
+  <symbol id="i-vape" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="12" rx="2"/><path d="M11 9V6h2v3M8 5c0-1.5 1.5-2 2.5-1.2M14 3.8c1-.8 2.5-.3 2.5 1.2 1.2 0 2 1 1.5 2"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21V11M12 11c0-4 1-7 0-9-1 2 0 5 0 9zM12 12c-3-1-6-4-7-6 2 .2 5 2.2 7 6zM12 12c3-1 6-4 7-6-2 .2-5 2.2-7 6zM12 15c-2 0-5-1-6-2.5M12 15c2 0 5-1 6-2.5"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-35 12 12)"/><path d="M9.2 7.9l5.6 8.2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-memory" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V5a2.5 2.5 0 0 0-3-1zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1"/><path d="M12 9h3M12 14h2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5.5C5.5 4 9 4 12 6c3-2 6.5-2 9-.5V19c-2.5-1.5-6-1.5-9 .5-3-2-6.5-2-9-.5V5.5z"/><path d="M12 6v13.5"/></symbol>
+  <symbol id="i-sign" viewBox="0 0 24 24"><path d="M12 3v18M12 5h7l2 2.5-2 2.5h-7M12 12H5l-2 2.5L5 17h7"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l2.4 6.3L21 9l-5 4.3L17.5 20 12 16.6 6.5 20 8 13.3 3 9l6.6-.7z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/><path d="M16 3v3M14.5 4.5h3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 8l4 4 3-3 5 6"/><path d="M19 11v4h-4"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 0 5A3 3 0 0 0 7 19a3 3 0 0 0 5 1zM12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1 0 5A3 3 0 0 1 17 19a3 3 0 0 1-5 1z"/></symbol>
+  <symbol id="i-run" viewBox="0 0 24 24"><circle cx="14" cy="4" r="2"/><path d="M8 21l3-6 3 2v5M6 12l3-4 4 1 2 3 3 1M11 15l-1-4"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-5 4-5s4 2 4 5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.2-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h7"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-life" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 10v4h3l8 5V5L6 10H3zM18 9a4 4 0 0 1 0 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Mente Clara, ir al inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><path d="M16 8.5a3.2 3.2 0 0 0-6 .6 3 3 0 0 0-2.2 4.4 3 3 0 0 0 .4 5 3.2 3.2 0 0 0 3.2 3.9 3 3 0 0 0 4.6 1.6zM16 8.5a3.2 3.2 0 0 1 6 .6 3 3 0 0 1 2.2 4.4 3 3 0 0 1-.4 5 3.2 3.2 0 0 1-3.2 3.9 3 3 0 0 1-4.6 1.6" fill="none" stroke="var(--surface)" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Mente Clara
+    </a>
+    <button class="menubtn" id="menubtn" aria-expanded="false" aria-controls="navlinks"><svg class="ico" style="width:20px;height:20px"><use href="#i-menu"/></svg>Secciones</button>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#sustancias">Sustancias</a></li>
+      <li><a href="#cerebro">Cerebro</a></li>
+      <li><a href="#rendimiento">Rendimiento</a></li>
+      <li><a href="#evidencia">Evidencia</a></li>
+      <li><a href="#datos">¿Sabías que…?</a></li>
+      <li><a href="#proteccion">Protección</a></li>
+      <li><a href="#mitos">Mito o realidad</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="#reflexion">Reflexión</a></li>
+      <li><a href="#fuentes">Fuentes</a></li>
+    </ul>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main>
+<!-- ======================= 1. HERO ======================= -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow"><b>IB PYP</b> Proyecto de investigación · Exposición</p>
+      <h1>Decide con la <em>mente clara</em>.</h1>
+      <p class="lead">El alcohol y las drogas pueden afectar la <span class="hl">concentración, la memoria y la motivación</span>, justo lo que usamos para aprender. Investigamos qué dice la ciencia para que puedas tomar decisiones informadas.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#sustancias">Descubre más <svg class="ico" style="width:20px;height:20px"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#quiz">Pon a prueba lo que sabes</a>
+      </div>
+      <div class="hero-meta"><span>Fuentes: OMS · CDC · NIDA · SENDA</span><span>Datos verificados con año y enlace</span></div>
+    </div>
+    <figure class="hero-art" style="margin:0">
+      <svg viewBox="0 0 520 440" role="img" aria-labelledby="heroT heroD">
+        <title id="heroT">Ilustración: estudiante frente a un camino que se divide</title>
+        <desc id="heroD">Una estudiante con mochila mira un cerebro formado por conexiones sobre un cuaderno abierto. Delante, el camino se divide en dos: uno lleva a un libro, una luna para dormir y un balón; el otro está marcado con un signo de pregunta.</desc>
+        <rect x="8" y="8" width="504" height="424" rx="28" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+        <g stroke="var(--line)" stroke-width="1">
+          <path d="M8 64h504M8 120h504M8 176h504M8 232h504M8 288h504M8 344h504M8 400h504"/>
+        </g>
+        <path d="M60 8v424" stroke="var(--myth)" stroke-opacity=".35" stroke-width="2"/>
+        <!-- brain network -->
+        <g transform="translate(250 58)">
+          <path d="M70 18c-10-22-44-22-52-2-24-4-40 18-30 38-18 12-14 40 6 46-2 24 24 36 42 26 12 18 34 14 34-6V18z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M70 18c10-22 44-22 52-2 24-4 40 18 30 38 18 12 14 40-6 46 2 24-24 36-42 26-12 18-34 14-34-6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>
+          <g stroke="var(--accent)" stroke-width="2" fill="none" opacity=".75">
+            <path d="M24 44L46 62 30 90M46 62l24-6M96 40l-26 16 22 30 30-10M92 86l-4 26M46 62l6 32"/>
+          </g>
+          <g fill="var(--accent)">
+            <circle cx="24" cy="44" r="5"/><circle cx="46" cy="62" r="6"/><circle cx="30" cy="90" r="5"/><circle cx="70" cy="56" r="5"/><circle cx="96" cy="40" r="5"/><circle cx="92" cy="86" r="6"/><circle cx="122" cy="76" r="5"/><circle cx="52" cy="94" r="4"/><circle cx="88" cy="112" r="4"/>
+          </g>
+          <circle class="pulse" cx="46" cy="62" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        </g>
+        <!-- student -->
+        <g transform="translate(96 150)">
+          <path d="M40 150c0-40 18-64 50-64s50 24 50 64z" fill="var(--blue)"/>
+          <rect x="16" y="96" width="34" height="58" rx="10" fill="var(--accent)" opacity=".9"/>
+          <circle cx="90" cy="58" r="32" fill="#E9B894"/>
+          <path d="M58 56c0-24 16-38 34-38 20 0 32 14 32 30-12-4-22-12-26-20-8 12-24 22-40 28z" fill="#3B2A22"/>
+          <path d="M120 48c8 6 10 30 4 46" stroke="#3B2A22" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <circle cx="100" cy="62" r="3" fill="#3B2A22"/>
+          <path d="M96 76q6 4 12 0" stroke="#3B2A22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- thought dots -->
+        <g fill="var(--accent)"><circle cx="220" cy="186" r="4"/><circle cx="236" cy="168" r="6"/><circle cx="256" cy="148" r="8"/></g>
+        <!-- fork path -->
+        <path d="M186 432c0-50 20-80 70-96" stroke="var(--line)" stroke-width="30" fill="none" stroke-linecap="round"/>
+        <path d="M256 336c60-18 110-30 190-30" stroke="var(--accent-soft)" stroke-width="30" fill="none" stroke-linecap="round"/>
+        <path d="M256 336c50 10 80 40 110 90" stroke="var(--surface-2)" stroke-width="30" fill="none" stroke-linecap="round"/>
+        <path d="M256 336c60-18 110-30 190-30" stroke="var(--accent)" stroke-width="3" stroke-dasharray="2 10" fill="none" stroke-linecap="round"/>
+        <!-- icons on good path -->
+        <g transform="translate(300 262)">
+          <rect width="46" height="46" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+          <path d="M11 17c4-2.5 8-2.5 12 0 4-2.5 8-2.5 12 0v15c-4-2.5-8-2.5-12 0-4-2.5-8-2.5-12 0zM23 17v15" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round"/>
+        </g>
+        <g transform="translate(360 248)">
+          <rect width="46" height="46" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+          <path d="M32 27a10 10 0 0 1-13-13 10 10 0 1 0 13 13z" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round"/>
+        </g>
+        <g transform="translate(420 240)">
+          <rect width="46" height="46" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+          <circle cx="23" cy="23" r="11" fill="none" stroke="var(--accent)" stroke-width="2.4"/><path d="M12 23h22M23 12c-5 6-5 16 0 22M23 12c5 6 5 16 0 22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        </g>
+        <g transform="translate(372 364)">
+          <circle cx="20" cy="20" r="20" fill="var(--surface)" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 4"/>
+          <text x="20" y="28" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="22" fill="var(--muted)">?</text>
+        </g>
+        <!-- highlighter label -->
+        <rect x="300" y="200" width="150" height="14" fill="var(--marker-bg)"/>
+        <text x="306" y="210" font-family="IBM Plex Mono, monospace" font-size="13" fill="var(--ink)">hábitos que suman</text>
+      </svg>
+      <figcaption class="art-caption">Ilustración original creada para este proyecto</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= 2. SUSTANCIAS ======================= -->
+<section class="band" id="sustancias">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>01</b> Conceptos clave</p>
+      <h2>¿Qué son el alcohol y las drogas?</h2>
+      <p class="lead">Son <strong>sustancias psicoactivas</strong>: al entrar al cuerpo llegan al cerebro y cambian la forma en que pensamos, sentimos o percibimos lo que nos rodea.</p>
+    </div>
+    <div class="define reveal">
+      <div class="quote-card">
+        <p>“Sustancias que, al ingresar al organismo, afectan procesos mentales como la percepción, la conciencia, la cognición o el estado de ánimo y las emociones.”</p>
+        <small>Definición de la Organización Mundial de la Salud (traducción propia). <a class="ref" href="#f2">OMS</a></small>
+      </div>
+      <div class="define-text">
+        <p>La OMS aclara que esta categoría incluye también al <strong>alcohol</strong> y la <strong>nicotina</strong>, aunque sean legales para adultos en muchos países. <a class="ref" href="#f2">OMS</a></p>
+        <p>Durante la adolescencia el cerebro todavía está madurando. Las zonas que controlan el juicio y la toma de decisiones <span class="hl">no terminan de desarrollarse hasta el comienzo o la mitad de los 20 años</span>. Por eso el consumo a esta edad tiene más potencial de alterar funciones clave para aprender. <a class="ref" href="#f9">NIDA 2020</a></p>
+      </div>
+    </div>
+    <div class="cards-4">
+      <article class="sub reveal">
+        <div class="tag"><span><svg class="ico"><use href="#i-glass"/></svg></span><h3>Alcohol</h3></div>
+        <p class="kind">Legal solo para adultos</p>
+        <p>La OMS lo describe como una sustancia tóxica y psicoactiva que puede producir dependencia. Afirma además que <strong>ningún nivel de consumo está libre de riesgo</strong>.</p>
+        <a class="ref" href="#f1" style="justify-self:start">OMS 2024</a>
+      </article>
+      <article class="sub reveal">
+        <div class="tag"><span><svg class="ico"><use href="#i-vape"/></svg></span><h3>Nicotina y vapeo</h3></div>
+        <p class="kind">Cigarrillos y vapeadores</p>
+        <p>La mayoría de los vapeadores contienen nicotina, que es adictiva. En adolescentes puede dañar las partes del cerebro que controlan la <strong>atención, el aprendizaje, el ánimo y el control de impulsos</strong>.</p>
+        <a class="ref" href="#f6" style="justify-self:start">CDC 2024</a>
+      </article>
+      <article class="sub reveal">
+        <div class="tag"><span><svg class="ico"><use href="#i-leaf"/></svg></span><h3>Cannabis</h3></div>
+        <p class="kind">Marihuana · THC</p>
+        <p>Su principal componente psicoactivo es el THC. Con el tiempo puede cambiar el cerebro de formas que hacen <strong>más difícil aprender o recordar</strong>, especialmente porque el cerebro sigue creciendo hasta los 20 años.</p>
+        <a class="ref" href="#f10" style="justify-self:start">NIDA 2025</a>
+      </article>
+      <article class="sub reveal">
+        <div class="tag"><span><svg class="ico"><use href="#i-pill"/></svg></span><h3>Otras drogas</h3></div>
+        <p class="kind">Ilegales o mal usadas</p>
+        <p>Incluye sustancias como la cocaína o la pasta base, y también medicamentos usados sin indicación médica. Todas actúan sobre el cerebro y pueden afectar la motivación, la memoria y el juicio.</p>
+        <span style="display:flex;gap:6px;flex-wrap:wrap"><a class="ref" href="#f9">NIDA 2020</a><a class="ref" href="#f12">SENDA 2025</a></span>
+      </article>
+    </div>
+    <p class="note reveal"><svg class="ico"><use href="#i-info"/></svg><span>Esta página es preventiva y educativa. No explica cómo conseguir ni consumir ninguna sustancia; explica lo que la ciencia sabe sobre sus efectos en quienes todavía están aprendiendo y creciendo.</span></p>
+  </div>
+</section>
+
+<!-- ======================= 3. CEREBRO ======================= -->
+<section id="cerebro">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>02</b> Cerebro y aprendizaje</p>
+      <h2>¿Cómo pueden afectar al cerebro y al aprendizaje?</h2>
+      <p class="lead">Aprender necesita un cerebro atento, descansado y motivado. Estas son las funciones que las investigaciones muestran como más sensibles durante la adolescencia.</p>
+    </div>
+    <div class="brain-layout">
+      <figure class="brain-fig reveal" style="margin:0">
+        <svg viewBox="0 0 300 240" role="img" aria-labelledby="bT bD">
+          <title id="bT">Diagrama simplificado del cerebro</title>
+          <desc id="bD">Vista lateral simplificada del cerebro. La zona frontal, la corteza prefrontal, está destacada como la última en madurar; también se señalan las zonas relacionadas con memoria y motivación.</desc>
+          <path d="M60 150c-30-10-40-50-20-80 10-30 50-50 90-48 30-16 80-14 106 10 30 10 44 44 34 72 4 26-20 46-46 46-10 14-34 18-50 10-8 16-34 18-46 4-20 6-50-2-68-14z" fill="var(--surface-2)" stroke="var(--muted)" stroke-width="2.5"/>
+          <path d="M40 70c10-30 50-50 90-48-8 30-22 60-36 88-20 14-40 10-60 8-10-16-6-34 6-48z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+          <path d="M150 180c14 20 50 20 60 0" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <path d="M150 170c10-26 40-30 58-16" fill="none" stroke="var(--blue)" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/>
+          <path d="M120 120c20-20 50-24 70-10" fill="none" stroke="var(--muted)" stroke-width="1.6" opacity=".6"/>
+          <path d="M150 60c10 20 40 30 70 20" fill="none" stroke="var(--muted)" stroke-width="1.6" opacity=".6"/>
+          <circle cx="170" cy="150" r="10" fill="var(--blue)" opacity=".8"/>
+          <path d="M218 186c8 18 14 34 10 50" stroke="var(--muted)" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink)">
+            <text x="30" y="20">corteza prefrontal</text>
+            <path d="M70 26l6 40" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="186" y="126">memoria y</text>
+            <text x="186" y="139">motivación</text>
+          </g>
+        </svg>
+        <figcaption><strong>Corteza prefrontal:</strong> planifica, evalúa riesgos y controla impulsos. Es de las últimas zonas en madurar. <a class="ref" href="#f9">NIDA 2020</a><br><small>Diagrama simplificado, no anatómicamente exacto.</small></figcaption>
+      </figure>
+      <div class="cards-brain">
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-target"/></svg></span>
+          <h3>Concentración</h3>
+          <p>Mantenerse enfocado en una tarea requiere descanso y un cerebro sin interferencias. Dormir poco hace más difícil concentrarse en el colegio.</p>
+          <div class="src"><a class="ref" href="#f8">CDC 2026</a></div>
+        </article>
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-eye"/></svg></span>
+          <h3>Atención</h3>
+          <p>La nicotina puede dañar las partes del cerebro adolescente que controlan la atención y el control de impulsos.</p>
+          <div class="src"><a class="ref" href="#f6">CDC 2024</a></div>
+        </article>
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-memory"/></svg></span>
+          <h3>Memoria</h3>
+          <p>Beber alcohol siendo menor de edad puede hacer más lento el desarrollo del cerebro y causar problemas de memoria. El THC puede dificultar recordar lo aprendido.</p>
+          <div class="src"><a class="ref" href="#f4">CDC 2025</a><a class="ref" href="#f10">NIDA 2025</a></div>
+        </article>
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-book"/></svg></span>
+          <h3>Capacidad de aprendizaje</h3>
+          <p>Como el cerebro adolescente aún se está formando, el consumo tiene más potencial de alterar áreas críticas para el aprendizaje.</p>
+          <div class="src"><a class="ref" href="#f9">NIDA 2020</a></div>
+        </article>
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-sign"/></svg></span>
+          <h3>Toma de decisiones</h3>
+          <p>Las zonas del juicio y la toma de decisiones maduran hasta el comienzo o la mitad de los 20 años, lo que aumenta el riesgo de probar sustancias o seguir consumiéndolas.</p>
+          <div class="src"><a class="ref" href="#f9">NIDA 2020</a></div>
+        </article>
+        <article class="bcard reveal">
+          <span class="ib"><svg class="ico"><use href="#i-spark"/></svg></span>
+          <h3>Motivación</h3>
+          <p>El consumo en la adolescencia puede alterar áreas del cerebro relacionadas con la motivación, que nos ayuda a empezar y terminar lo que nos proponemos.</p>
+          <div class="src"><a class="ref" href="#f9">NIDA 2020</a></div>
+        </article>
+        <article class="bcard wide reveal">
+          <span class="ib"><svg class="ico"><use href="#i-moon"/></svg></span>
+          <h3>Sueño y descanso</h3>
+          <p>Los adolescentes de 13 a 17 años necesitan <strong>8 a 10 horas</strong> de sueño. El alcohol altera el sueño, y dormir mal también se asocia a un mayor riesgo de consumo en adolescentes y jóvenes: la relación va en ambas direcciones.</p>
+          <div class="src"><a class="ref" href="#f7">CDC 2024</a><a class="ref" href="#f11">Hasler et al. 2024</a></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4. RENDIMIENTO ======================= -->
+<section class="band" id="rendimiento">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>03</b> En la sala de clases</p>
+      <h2>Impacto en el desempeño académico</h2>
+      <p class="lead">Cuando se afectan la atención, la memoria, el sueño y la motivación, se nota en el día a día escolar. Estas son las formas en que el consumo de sustancias <em>puede</em> relacionarse con el rendimiento.</p>
+    </div>
+    <div class="impact">
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-target"/></svg><h3>Menor concentración en clases</h3></div><p>Cuesta seguir una explicación o participar si el cerebro está cansado o afectado por una sustancia.</p><span><a class="ref" href="#f6">CDC 2024</a> <a class="ref" href="#f8">CDC 2026</a></span></article>
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-memory"/></svg><h3>Problemas para estudiar y recordar</h3></div><p>Si la memoria se ve afectada, lo que se estudió puede no quedar guardado para la prueba.</p><span><a class="ref" href="#f4">CDC 2025</a> <a class="ref" href="#f10">NIDA 2025</a></span></article>
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-cal"/></svg><h3>Ausencias o atrasos</h3></div><p>La CDC incluye “más ausencias escolares” entre las consecuencias del consumo de alcohol en menores de edad.</p><span><a class="ref" href="#f4">CDC 2025</a></span></article>
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-spark"/></svg><h3>Menor motivación</h3></div><p>Se puede perder el interés por metas escolares, deportivas o personales que antes importaban.</p><span><a class="ref" href="#f9">NIDA 2020</a></span></article>
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-doc"/></svg><h3>Trabajos sin terminar</h3></div><p>Cuando cuesta concentrarse, recordar y mantener la motivación, completar tareas y proyectos a tiempo se vuelve más difícil.</p><span class="source">Conclusión nuestra a partir de las fuentes anteriores</span></article>
+      <article class="imp reveal"><div class="top"><svg class="ico"><use href="#i-trend"/></svg><h3>Cambios en las notas</h3></div><p>La CDC señala “notas más bajas” entre las consecuencias, y sus encuestas muestran una asociación entre consumo de alcohol y calificaciones.</p><span><a class="ref" href="#f4">CDC 2025</a> <a class="ref" href="#f5">CDC 2024</a></span></article>
+    </div>
+    <div class="factors">
+      <div class="panel reveal">
+        <h3>No a todos les afecta igual</h3>
+        <p style="color:var(--muted)">Los efectos dependen de muchos factores. Por eso hablamos de riesgos y probabilidades, no de destinos seguros. La prevención funciona fortaleciendo los factores de protección y reduciendo los de riesgo. <a class="ref" href="#f9">NIDA 2020</a></p>
+        <div class="chips">
+          <span class="chip">Edad de inicio</span><span class="chip">Cantidad y frecuencia</span><span class="chip">Tipo de sustancia</span><span class="chip">Horas de sueño</span><span class="chip">Estrés y salud mental</span><span class="chip">Apoyo de familia y colegio</span><span class="chip">Amistades y entorno</span>
+        </div>
+      </div>
+      <div class="panel think reveal">
+        <p class="eyebrow" style="color:var(--marker)">Pensamiento crítico</p>
+        <h3>¿Correlación o causa?</h3>
+        <div class="eq"><span>Consumo de alcohol</span>↔<span>Notas más bajas</span></div>
+        <p>La CDC encontró que los estudiantes con notas más bajas reportan más consumo de alcohol. Pero advierte que esto no prueba por sí solo qué causa qué: las notas bajas podrían llevar al consumo, otros factores podrían influir en ambos, o el consumo podría bajar las notas. <a class="ref" href="#f5">CDC 2024</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 5. EVIDENCIA ======================= -->
+<section id="evidencia">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>04</b> Investigación</p>
+      <h2>Investigación y evidencia</h2>
+      <p class="lead">Solo usamos organismos oficiales de salud y estudios publicados. Cada hallazgo indica quién lo dice, el año y el enlace al documento original.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Fuente</th><th>Qué encontramos</th><th>Año</th><th>Documento</th></tr></thead>
+        <tbody>
+          <tr><td class="org">OMS</td><td>No existe una forma de consumir alcohol que esté libre de riesgo. En 2019 el alcohol causó alrededor de 2,6 millones de muertes en el mundo.</td><td class="yr">2024</td><td><a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener">Alcohol: nota descriptiva ↗</a></td></tr>
+          <tr><td class="org">OMS Europa / HBSC</td><td>Entre estudiantes de 15 años de Europa, Asia Central y Canadá, el 57&nbsp;% ha probado alcohol y el 32&nbsp;% ha usado cigarrillos electrónicos alguna vez.</td><td class="yr">2024</td><td><a href="https://iris.who.int/handle/10665/376573" target="_blank" rel="noopener">A focus on adolescent substance use ↗</a></td></tr>
+          <tr><td class="org">CDC</td><td>El alcohol en menores de edad puede causar desarrollo cerebral más lento (con problemas de memoria), más ausencias escolares y notas más bajas.</td><td class="yr">2025</td><td><a href="https://www.cdc.gov/alcohol/underage-drinking/index.html" target="_blank" rel="noopener">About Underage Drinking ↗</a></td></tr>
+          <tr><td class="org">CDC</td><td>Estudiantes con notas mayormente “A” reportan menos consumo actual de alcohol (27&nbsp;%) que quienes tienen notas “D/F” (40&nbsp;%). Datos de la encuesta YRBS 2019.</td><td class="yr">2024</td><td><a href="https://www.cdc.gov/healthyschools/health_and_academics/alcohol_use.htm" target="_blank" rel="noopener">Alcohol Behaviors and Academic Grades ↗</a></td></tr>
+          <tr><td class="org">CDC</td><td>La nicotina puede dañar las partes del cerebro adolescente que controlan atención, aprendizaje, ánimo y control de impulsos.</td><td class="yr">2024</td><td><a href="https://www.cdc.gov/tobacco/e-cigarettes/youth.html" target="_blank" rel="noopener">E-Cigarette Use Among Youth ↗</a></td></tr>
+          <tr><td class="org">NIDA</td><td>Las zonas del juicio y la toma de decisiones maduran hasta el comienzo o la mitad de los 20. La prevención es la mejor estrategia.</td><td class="yr">2020</td><td><a href="https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/preventing-drug-misuse-addiction-best-strategy" target="_blank" rel="noopener">Preventing Drug Misuse and Addiction ↗</a></td></tr>
+          <tr><td class="org">SENDA (Chile)</td><td>En escolares de 8° básico a 4° medio, el consumo de alcohol en el último mes bajó de 24,0&nbsp;% (2021) a 22,7&nbsp;% (2023).</td><td class="yr">2025</td><td><a href="https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/" target="_blank" rel="noopener">15° Estudio en Población Escolar ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="method">
+      <div class="step reveal"><span class="n">1</span><h3>Preguntamos</h3><p>¿Cómo puede el consumo de sustancias afectar lo que necesitamos para aprender?</p></div>
+      <div class="step reveal"><span class="n">2</span><h3>Buscamos</h3><p>Priorizamos OMS, CDC, NIDA y SENDA: organismos oficiales que publican sus datos y métodos.</p></div>
+      <div class="step reveal"><span class="n">3</span><h3>Verificamos</h3><p>Revisamos cada cifra en su fuente original. Si no pudimos confirmarla, no la incluimos.</p></div>
+      <div class="step reveal"><span class="n">4</span><h3>Analizamos</h3><p>Distinguimos entre asociación y causa, y entre datos de Chile y de otros países.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 6. DATOS ======================= -->
+<section class="band" id="datos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>05</b> Datos y estadísticas</p>
+      <h2>¿Sabías que…?</h2>
+      <p class="lead">Cifras reales, con su fuente y año. Fíjate en qué país y qué grupo de edad mide cada estudio antes de compararlos.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile reveal"><span class="big">22,7&nbsp;%</span><p>de los escolares chilenos (8° básico a 4° medio) consumió alcohol en el último mes. La mayoría, 77&nbsp;%, <strong>no</strong> lo hizo.</p><span class="source">SENDA, estudio 2023 (publ. 2025) · <a href="https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/" target="_blank" rel="noopener">ver fuente ↗</a></span></div>
+      <div class="tile reveal"><span class="big">8–10 h</span><p>de sueño necesitan los adolescentes de 13 a 17 años cada noche.</p><span class="source">CDC, 2024 · <a href="https://www.cdc.gov/sleep/about/index.html" target="_blank" rel="noopener">ver fuente ↗</a></span></div>
+      <div class="tile reveal"><span class="big">20&nbsp;+</span><p>años: edad hasta la que siguen madurando las zonas del cerebro que controlan juicio y decisiones.</p><span class="source">NIDA, 2020 · <a href="https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/preventing-drug-misuse-addiction-best-strategy" target="_blank" rel="noopener">ver fuente ↗</a></span></div>
+      <div class="tile reveal"><span class="big">2,6 M</span><p>de muertes en el mundo fueron causadas por el alcohol en 2019.</p><span class="source">OMS, 2024 · <a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener">ver fuente ↗</a></span></div>
+    </div>
+
+    <div class="charts">
+      <figure class="chart span2 reveal" style="margin:0">
+        <h3>Alcohol y calificaciones en estudiantes de enseñanza media (EE.&nbsp;UU.)</h3>
+        <p class="sub-t">Porcentaje de estudiantes según sus notas. Una asociación, no una prueba de causa.</p>
+        <div class="legend"><span><i style="background:var(--accent)"></i>Notas mayormente A</span><span><i style="background:var(--blue)"></i>Notas mayormente D/F</span></div>
+        <div class="bars" role="img" aria-label="Gráfico de barras. Consumo actual de alcohol: 27 por ciento con notas A, 40 por ciento con notas D o F. Consumo excesivo episódico: 13 y 23 por ciento. Primer trago antes de los 13 años: 12 y 26 por ciento.">
+          <div class="brow"><span class="lbl">Consumo actual de alcohol</span><div class="btrack"><div class="bar" style="--v:27;--max:50"><i></i><b>27&nbsp;%</b></div><div class="bar" style="--v:40;--max:50;--c:var(--blue)"><i></i><b>40&nbsp;%</b></div></div></div>
+          <div class="brow"><span class="lbl">Consumo excesivo en una ocasión</span><div class="btrack"><div class="bar" style="--v:13;--max:50"><i></i><b>13&nbsp;%</b></div><div class="bar" style="--v:23;--max:50;--c:var(--blue)"><i></i><b>23&nbsp;%</b></div></div></div>
+          <div class="brow"><span class="lbl">Primer trago antes de los 13</span><div class="btrack"><div class="bar" style="--v:12;--max:50"><i></i><b>12&nbsp;%</b></div><div class="bar" style="--v:26;--max:50;--c:var(--blue)"><i></i><b>26&nbsp;%</b></div></div></div>
+          <div class="brow" aria-hidden="true"><span></span><div class="axis"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50&nbsp;%</span></div></div>
+        </div>
+        <figcaption class="source">CDC, 2024 (datos YRBS 2019) · <a href="https://www.cdc.gov/healthyschools/health_and_academics/alcohol_use.htm" target="_blank" rel="noopener">Alcohol Behaviors and Academic Grades ↗</a></figcaption>
+      </figure>
+
+      <figure class="chart reveal" style="margin:0">
+        <h3>Escolares en Chile: alcohol en el último mes</h3>
+        <p class="sub-t">De cada 100 estudiantes de 8° básico a 4° medio (2023).</p>
+        <div class="waffle-wrap">
+          <div class="waffle" role="img" aria-label="Cuadrícula de 100 cuadrados: cerca de 23 coloreados, que representan el 22,7 por ciento.">
+            <!-- filled by script; static fallback below -->
+          </div>
+          <div class="waffle-text"><span class="big">≈23</span><p>de cada 100 consumió alcohol en el último mes.</p></div>
+        </div>
+        <div class="mini" role="img" aria-label="Comparación: 24,0 por ciento en 2021 y 22,7 por ciento en 2023.">
+          <div class="brow"><span class="lbl">2021</span><div class="bar" style="--v:24;--max:40;--c:var(--muted)"><i></i><b>24,0&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">2023</span><div class="bar" style="--v:22.7;--max:40"><i></i><b>22,7&nbsp;%</b></div></div>
+        </div>
+        <figcaption class="source">SENDA, 2025 (15° Estudio Nacional de Drogas en Población Escolar 2023) · <a href="https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/" target="_blank" rel="noopener">ver fuente ↗</a></figcaption>
+      </figure>
+
+      <figure class="chart reveal" style="margin:0">
+        <h3>Estudiantes de 15 años en Europa, Asia Central y Canadá</h3>
+        <p class="sub-t">Porcentaje que ha usado cada sustancia (encuesta HBSC).</p>
+        <div class="bars" role="img" aria-label="Alcohol alguna vez 57 por ciento; alcohol en los últimos 30 días 37 por ciento; cigarrillo electrónico alguna vez 32 por ciento; cigarrillo electrónico en los últimos 30 días 20 por ciento; cannabis alguna vez 12 por ciento.">
+          <div class="brow"><span class="lbl">Alcohol, alguna vez</span><div class="bar" style="--v:57"><i></i><b>57&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Alcohol, últimos 30 días</span><div class="bar" style="--v:37"><i></i><b>37&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Vapeo, alguna vez</span><div class="bar" style="--v:32;--c:var(--blue)"><i></i><b>32&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Vapeo, últimos 30 días</span><div class="bar" style="--v:20;--c:var(--blue)"><i></i><b>20&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Cannabis, alguna vez</span><div class="bar" style="--v:12;--c:var(--muted)"><i></i><b>12&nbsp;%</b></div></div>
+        </div>
+        <figcaption class="source">OMS Europa / HBSC, 2024 · <a href="https://iris.who.int/handle/10665/376573" target="_blank" rel="noopener">informe ↗</a> · <a href="https://www.hbsc.org/new-who-hbsc-report-reveals-concerning-trends-in-adolescent-substance-use/" target="_blank" rel="noopener">resumen ↗</a></figcaption>
+      </figure>
+
+      <figure class="chart reveal" style="margin:0">
+        <h3>¿Cuántos estudiantes duermen lo suficiente?</h3>
+        <p class="sub-t">Estudiantes de enseñanza media en EE.&nbsp;UU. que duermen al menos 8 horas en una noche de colegio (2025).</p>
+        <div class="sleep-row" role="img" aria-label="Uno de cada cuatro estudiantes duerme al menos 8 horas.">
+          <svg class="person on" viewBox="0 0 44 60" aria-hidden="true"><circle cx="22" cy="12" r="10" fill="currentColor"/><path d="M4 60c0-18 8-28 18-28s18 10 18 28z" fill="currentColor"/></svg>
+          <svg class="person" viewBox="0 0 44 60" aria-hidden="true"><circle cx="22" cy="12" r="10" fill="currentColor"/><path d="M4 60c0-18 8-28 18-28s18 10 18 28z" fill="currentColor"/></svg>
+          <svg class="person" viewBox="0 0 44 60" aria-hidden="true"><circle cx="22" cy="12" r="10" fill="currentColor"/><path d="M4 60c0-18 8-28 18-28s18 10 18 28z" fill="currentColor"/></svg>
+          <svg class="person" viewBox="0 0 44 60" aria-hidden="true"><circle cx="22" cy="12" r="10" fill="currentColor"/><path d="M4 60c0-18 8-28 18-28s18 10 18 28z" fill="currentColor"/></svg>
+        </div>
+        <p><strong>Cerca de 1 de cada 4</strong> duerme 8 horas o más. Entre 2015 y 2025, esa proporción disminuyó.</p>
+        <figcaption class="source">CDC, 2026 (datos YRBS 2025) · <a href="https://www.cdc.gov/yrbs/youth-health-in-focus/sleep.html" target="_blank" rel="noopener">ver fuente ↗</a></figcaption>
+      </figure>
+
+      <figure class="chart reveal" style="margin:0">
+        <h3>Chile: percepción de riesgo del uso frecuente de marihuana</h3>
+        <p class="sub-t">Escolares que consideran de gran riesgo usar marihuana frecuentemente.</p>
+        <div class="mini" role="img" aria-label="30,3 por ciento en 2021 y 34,4 por ciento en 2023.">
+          <div class="brow"><span class="lbl">2021</span><div class="bar" style="--v:30.3;--max:50;--c:var(--muted)"><i></i><b>30,3&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">2023</span><div class="bar" style="--v:34.4;--max:50;--c:var(--real)"><i></i><b>34,4&nbsp;%</b></div></div>
+        </div>
+        <p>Más estudiantes reconocen el riesgo. En el mismo estudio, el consumo de marihuana en el último año se mantuvo en 19,1&nbsp;%.</p>
+        <figcaption class="source">SENDA, 2025 · <a href="https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/" target="_blank" rel="noopener">ver fuente ↗</a></figcaption>
+      </figure>
+
+      <figure class="chart reveal" style="margin:0">
+        <h3>Vapeo en estudiantes de EE.&nbsp;UU.</h3>
+        <p class="sub-t">Uso actual de cigarrillos electrónicos (2024).</p>
+        <div class="bars" role="img" aria-label="High school 7,8 por ciento; middle school 3,5 por ciento; total 5,9 por ciento.">
+          <div class="brow"><span class="lbl">High school (9°–12°)</span><div class="bar" style="--v:7.8;--max:20;--c:var(--blue)"><i></i><b>7,8&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Middle school (6°–8°)</span><div class="bar" style="--v:3.5;--max:20;--c:var(--blue)"><i></i><b>3,5&nbsp;%</b></div></div>
+          <div class="brow"><span class="lbl">Total</span><div class="bar" style="--v:5.9;--max:20"><i></i><b>5,9&nbsp;% (1,63 millones)</b></div></div>
+        </div>
+        <p>De quienes vapean, el 87,6&nbsp;% usa productos con sabores y el 26,3&nbsp;% lo hace todos los días.</p>
+        <figcaption class="source">CDC, 2024 (National Youth Tobacco Survey) · <a href="https://www.cdc.gov/tobacco/e-cigarettes/youth.html" target="_blank" rel="noopener">ver fuente ↗</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 7. PROTECCIÓN ======================= -->
+<section id="proteccion">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>06</b> Lo que sí suma</p>
+      <h2>Factores de protección</h2>
+      <p class="lead">La prevención funciona reforzando los factores que nos protegen. <a class="ref" href="#f9">NIDA 2020</a> Estos hábitos ayudan a cuidar tu cerebro, tu salud y tu aprendizaje.</p>
+    </div>
+    <div class="protect">
+      <figure class="protect-art reveal" style="margin:0">
+        <svg viewBox="0 0 360 320" role="img" aria-labelledby="pT pD">
+          <title id="pT">Ilustración: hábitos saludables</title>
+          <desc id="pD">Un reloj semanal con hábitos saludables alrededor: una luna para dormir, una zapatilla para el deporte, dos personas conversando, un cuaderno de estudio y un corazón.</desc>
+          <circle cx="180" cy="160" r="112" fill="var(--real-soft)"/>
+          <circle cx="180" cy="160" r="70" fill="var(--surface)" stroke="var(--real)" stroke-width="3"/>
+          <path d="M180 110v50l30 18" stroke="var(--real)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <circle cx="180" cy="160" r="6" fill="var(--real)"/>
+          <g fill="var(--surface)" stroke="var(--real)" stroke-width="2.5">
+            <circle cx="180" cy="36" r="30"/><circle cx="300" cy="110" r="30"/><circle cx="270" cy="250" r="30"/><circle cx="90" cy="250" r="30"/><circle cx="60" cy="110" r="30"/>
+          </g>
+          <g fill="none" stroke="var(--real)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M192 44a13 13 0 0 1-17-17 13 13 0 1 0 17 17z"/>
+            <path d="M286 118c0-6 6-8 10-12l6 4c2 4 6 6 12 6v4h-28z"/>
+            <circle cx="262" cy="244" r="6"/><circle cx="280" cy="246" r="5"/><path d="M252 264c0-8 5-12 10-12s10 4 10 12M272 264c0-6 4-10 8-10s8 4 8 10"/>
+            <path d="M78 238h18a6 6 0 0 1 6 6v18H84a6 6 0 0 1-6-6zM84 246h12M84 252h8"/>
+            <path d="M60 124s-14-8-14-16a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 8-14 16-14 16z"/>
+          </g>
+        </svg>
+        <p class="art-caption" style="text-align:left">Ilustración original creada para este proyecto</p>
+      </figure>
+      <div class="plist">
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-moon"/></svg><h3>Dormir bien</h3></div><p>Apunta a 8–10 horas. Deja el celular lejos de la cama y mantén horarios parecidos. <a class="ref" href="#f7">CDC 2024</a></p></article>
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-run"/></svg><h3>Deporte y recreación</h3></div><p>Moverse, jugar, crear música o arte: actividades que dan energía, amistades y metas propias.</p></article>
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-people"/></svg><h3>Redes de apoyo</h3></div><p>Amistades, familia, profesores y comunidad. Sentirse parte de un grupo protege.</p></article>
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-chat"/></svg><h3>Hablar con adultos de confianza</h3></div><p>Madre, padre, tutor, profesor jefe u orientador. Preguntar no es meterse en problemas.</p></article>
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-wind"/></svg><h3>Manejar el estrés</h3></div><p>Respirar profundo, salir a caminar, escribir lo que sientes o dividir una tarea grande en pasos pequeños.</p></article>
+        <article class="pitem reveal"><div class="top"><svg class="ico"><use href="#i-pen"/></svg><h3>Hábitos de estudio</h3></div><p>Un horario fijo, pausas cortas y repasar varias veces antes de la prueba en vez de estudiar todo la noche anterior.</p></article>
+        <div class="helpbox reveal">
+          <div><span class="num">1412</span></div>
+          <div>
+            <h3 style="margin-bottom:4px">Buscar ayuda cuando sea necesario</h3>
+            <p>Si tú o alguien que conoces necesita orientación, habla con un adulto de confianza. En Chile, el <strong>Fono Drogas y Alcohol 1412</strong> de SENDA es gratuito, confidencial y atiende las 24 horas. <a class="ref" href="#f13">SENDA</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 8. MITO O REALIDAD ======================= -->
+<section class="band" id="mitos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>07</b> Interactivo</p>
+      <h2>¿Mito o realidad?</h2>
+      <p class="lead">Lee cada afirmación y elige. Después verás la explicación con su fuente.</p>
+    </div>
+    <div class="myths" id="myths"></div>
+    <p class="myth-score" id="mythScore" aria-live="polite">0 de 5 respondidas</p>
+  </div>
+</section>
+
+<!-- ======================= 9. QUIZ ======================= -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>08</b> Mini quiz</p>
+      <h2>¿Cuánto aprendiste?</h2>
+      <p class="lead">Cinco preguntas sobre lo que leíste en esta página. Responde todas y revisa tu puntaje.</p>
+    </div>
+    <form class="quiz" id="quizForm" novalidate>
+      <div id="quizQs"></div>
+      <div class="quiz-actions">
+        <button type="submit" class="btn btn-primary" id="quizSubmit">Ver mi puntaje</button>
+        <button type="button" class="btn btn-ghost" id="quizReset" hidden>Intentar de nuevo</button>
+        <span class="quiz-msg" id="quizMsg" aria-live="polite"></span>
+      </div>
+      <div class="result" id="quizResult" hidden aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ======================= 10. REFLEXIÓN ======================= -->
+<section id="reflexion" style="padding-top:0">
+  <div class="wrap">
+    <div class="reflect reveal">
+      <svg class="deco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><use href="#i-brain"/></svg>
+      <p class="eyebrow" style="color:var(--marker)">Reflexión final</p>
+      <blockquote>“Las decisiones que tomamos hoy pueden influir en <span class="hl">nuestro aprendizaje, nuestra salud y nuestro futuro</span>.”</blockquote>
+      <p>Informarse es el primer paso para decidir con libertad. No se trata de miedo, sino de conocer cómo funciona nuestro cerebro y qué lo ayuda a crecer. Y si algo nos preocupa, pedir ayuda es una decisión valiente e inteligente.</p>
+      <div class="qs">
+        <div><b>Piensa</b>¿Qué hábito de esta página ya practicas y cuál te gustaría mejorar?</div>
+        <div><b>Conecta</b>¿A qué adulto de confianza podrías acudir si tú o un amigo necesitan apoyo?</div>
+        <div><b>Actúa</b>¿Cómo podrías compartir lo aprendido con tu curso o tu familia?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= NUESTRA ACCIÓN ======================= -->
+<section class="band" id="accion">
+  <div class="wrap action">
+    <div class="sec-head reveal" style="margin:0">
+      <p class="eyebrow"><b>09</b> Acción</p>
+      <h2>Nuestra acción</h2>
+      <p class="lead">Creamos esta página para generar conciencia y ayudar a otros estudiantes a tomar decisiones informadas sobre el alcohol y las drogas. Nuestra meta es que cualquier estudiante pueda entender, con fuentes confiables, cómo su salud y su aprendizaje están conectados.</p>
+      <p style="color:var(--muted)">Invitamos a compartirla con compañeros, familias y profesores, y a usar el quiz y el “Mito o realidad” como actividad en clases.</p>
+    </div>
+    <div class="attrs">
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-search"/></svg>Investigación</b><p>Formulamos preguntas y buscamos respuestas en organismos oficiales.</p></div>
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-brain"/></svg>Pensamiento crítico</b><p>Distinguimos correlación de causa y comparamos datos con cuidado.</p></div>
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-chat"/></svg>Comunicación</b><p>Explicamos la ciencia con palabras claras, gráficos y actividades.</p></div>
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-moon"/></svg>Reflexión</b><p>Pensamos en nuestros propios hábitos y en cómo cuidarnos.</p></div>
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-megaphone"/></svg>Acción y concienciación</b><p>Compartimos lo aprendido con nuestra comunidad escolar.</p></div>
+      <div class="attr reveal"><b><svg class="ico" style="width:20px;height:20px"><use href="#i-book"/></svg>Uso responsable de fuentes</b><p>Citamos cada dato con autor, año y enlace original.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 11. FUENTES ======================= -->
+<section id="fuentes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><b>10</b> Bibliografía</p>
+      <h2>Fuentes</h2>
+      <p class="lead">Todas las fuentes consultadas, con enlace al documento original. Consultadas en septiembre de 2026.</p>
+    </div>
+    <ol class="refs">
+      <li id="f1"><span>Organización Mundial de la Salud (OMS). (2024, 28 de junio). <em>Alcohol</em> [Nota descriptiva]. <a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener">https://www.who.int/news-room/fact-sheets/detail/alcohol</a></span></li>
+      <li id="f2"><span>Organización Mundial de la Salud (OMS). (s.f.). <em>Drugs (psychoactive)</em> [Tema de salud]. <a href="https://www.who.int/health-topics/drugs-psychoactive" target="_blank" rel="noopener">https://www.who.int/health-topics/drugs-psychoactive</a></span></li>
+      <li id="f3"><span>OMS Oficina Regional para Europa y HBSC. (2024). <em>A focus on adolescent substance use in Europe, central Asia and Canada. Health Behaviour in School-aged Children international report from the 2021/2022 survey, Volume 3</em>. <a href="https://iris.who.int/handle/10665/376573" target="_blank" rel="noopener">https://iris.who.int/handle/10665/376573</a> · Resumen: <a href="https://www.hbsc.org/new-who-hbsc-report-reveals-concerning-trends-in-adolescent-substance-use/" target="_blank" rel="noopener">hbsc.org</a></span></li>
+      <li id="f4"><span>Centers for Disease Control and Prevention (CDC). (2025, 14 de enero). <em>About Underage Drinking</em>. <a href="https://www.cdc.gov/alcohol/underage-drinking/index.html" target="_blank" rel="noopener">https://www.cdc.gov/alcohol/underage-drinking/index.html</a></span></li>
+      <li id="f5"><span>Centers for Disease Control and Prevention (CDC). (2024, 19 de julio). <em>Alcohol Behaviors and Academic Grades</em> (datos de la Youth Risk Behavior Survey 2019). <a href="https://www.cdc.gov/healthyschools/health_and_academics/alcohol_use.htm" target="_blank" rel="noopener">https://www.cdc.gov/healthyschools/health_and_academics/alcohol_use.htm</a></span></li>
+      <li id="f6"><span>Centers for Disease Control and Prevention (CDC). (2024, 17 de octubre). <em>E-Cigarette Use Among Youth</em>. <a href="https://www.cdc.gov/tobacco/e-cigarettes/youth.html" target="_blank" rel="noopener">https://www.cdc.gov/tobacco/e-cigarettes/youth.html</a></span></li>
+      <li id="f7"><span>Centers for Disease Control and Prevention (CDC). (2024, 15 de mayo). <em>About Sleep</em>. <a href="https://www.cdc.gov/sleep/about/index.html" target="_blank" rel="noopener">https://www.cdc.gov/sleep/about/index.html</a></span></li>
+      <li id="f8"><span>Centers for Disease Control and Prevention (CDC). (2026, 18 de septiembre). <em>Sleep — Youth Health in Focus</em> (Youth Risk Behavior Survey 2025). <a href="https://www.cdc.gov/yrbs/youth-health-in-focus/sleep.html" target="_blank" rel="noopener">https://www.cdc.gov/yrbs/youth-health-in-focus/sleep.html</a></span></li>
+      <li id="f9"><span>National Institute on Drug Abuse (NIDA). (2020, 6 de julio). <em>Preventing Drug Misuse and Addiction: The Best Strategy</em>. En <em>Drugs, Brains, and Behavior: The Science of Addiction</em>. <a href="https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/preventing-drug-misuse-addiction-best-strategy" target="_blank" rel="noopener">https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/preventing-drug-misuse-addiction-best-strategy</a></span></li>
+      <li id="f10"><span>National Institute on Drug Abuse (NIDA). (2025, 28 de febrero). <em>Mind Matters: Cannabis (Marijuana)</em>. <a href="https://nida.nih.gov/research-topics/parents-educators/mind-matter-series/cannabis-marijuana" target="_blank" rel="noopener">https://nida.nih.gov/research-topics/parents-educators/mind-matter-series/cannabis-marijuana</a></span></li>
+      <li id="f11"><span>Hasler, B. P., Schulz, C. T., y Pedersen, S. L. (2024). Sleep-related predictors of risk for alcohol use and related problems in adolescents and young adults. <em>Alcohol Research: Current Reviews, 44</em>(1). National Institute on Alcohol Abuse and Alcoholism (NIAAA). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10948113/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC10948113/</a></span></li>
+      <li id="f12"><span>Servicio Nacional para la Prevención y Rehabilitación del Consumo de Drogas y Alcohol (SENDA). (2025, 20 de marzo). <em>Consumo de tabaco y alcohol en escolares alcanza niveles más bajos y aumenta percepción de riesgo de uso de cannabis</em> (15° Estudio Nacional de Drogas en Población Escolar 2023). Gobierno de Chile. <a href="https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/" target="_blank" rel="noopener">https://www.senda.gob.cl/noticia/consumo-de-tabaco-y-alcohol-en-escolares-alcanza-niveles-mas-bajos-y-aumenta-percepcion-de-riesgo-de-uso-de-cannabis/</a></span></li>
+      <li id="f13"><span>SENDA. (s.f.). <em>1412 Fono Drogas y Alcohol</em>. Gobierno de Chile. <a href="https://www.senda.gob.cl/1412-fono-drogas-y-alcohol-de-senda/" target="_blank" rel="noopener">https://www.senda.gob.cl/1412-fono-drogas-y-alcohol-de-senda/</a></span></li>
+    </ol>
+    <div class="credits">
+      <p><strong>Imágenes:</strong> todas las ilustraciones, diagramas e iconos de esta página son originales, creados especialmente para este proyecto. No se usaron imágenes de terceros. Cada ilustración incluye texto alternativo para lectores de pantalla.</p>
+      <p><strong>Traducciones:</strong> las citas de fuentes en inglés fueron traducidas al español por el equipo del proyecto.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Mente Clara · Proyecto de Exposición IB PYP · 2026</span>
+    <a href="#inicio">Volver al inicio ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Waffle chart: 22.7 of 100 ---- */
+  var w = document.querySelector('.waffle');
+  for (var i = 0; i < 100; i++) {
+    var s = document.createElement('span');
+    if (i < 22) s.className = 'f'; else if (i === 22) s.className = 'p';
+    w.appendChild(s);
+  }
+
+  /* ---- Scroll reveal (content stays visible; only slides in) ---- */
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.remove('pending'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px'});
+    items.forEach(function(el){
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('pending'); io.observe(el); }
+    });
+  }
+
+  /* ---- Nav: mobile menu, progress, active link ---- */
+  var btn = document.getElementById('menubtn'), nav = document.getElementById('navlinks');
+  btn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function(e){ if (e.target.tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); } });
+  var bar = document.getElementById('progress');
+  var links = [].slice.call(nav.querySelectorAll('a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function onScroll(){
+    var h = document.documentElement;
+    var p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+    bar.style.transform = 'scaleX(' + Math.min(1, p) + ')';
+    var cur = -1;
+    secs.forEach(function(s, i){ if (s && s.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach(function(a, i){ a.classList.toggle('on', i === cur); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---- Mito o realidad ---- */
+  var myths = [
+    {t:'Si tomo solo un poco de alcohol, no hay ningún riesgo.', a:'mito',
+     e:'La OMS afirma que no existe ninguna forma de consumo de alcohol libre de riesgo. Incluso niveles bajos pueden causar daño.', r:'f1', rl:'OMS 2024'},
+    {t:'El cerebro sigue desarrollándose durante la adolescencia y hasta los 20 y tantos años.', a:'realidad',
+     e:'Las zonas que controlan el juicio y la toma de decisiones maduran hasta el comienzo o la mitad de los 20 años.', r:'f9', rl:'NIDA 2020'},
+    {t:'Vapear es solo vapor de agua; no afecta al cerebro.', a:'mito',
+     e:'La mayoría de los vapeadores contiene nicotina, que puede dañar las partes del cerebro adolescente que controlan la atención, el aprendizaje, el ánimo y el control de impulsos.', r:'f6', rl:'CDC 2024'},
+    {t:'La mayoría de los escolares en Chile consume alcohol todos los meses.', a:'mito',
+     e:'Según SENDA, el 22,7 % de los escolares de 8° básico a 4° medio consumió alcohol en el último mes (2023). Es decir, cerca de 77 de cada 100 no lo hizo.', r:'f12', rl:'SENDA 2025'},
+    {t:'Dormir lo suficiente ayuda a concentrarse en clases.', a:'realidad',
+     e:'Dormir lo suficiente apoya la salud física y mental y la capacidad de concentrarse en el colegio. Los adolescentes necesitan de 8 a 10 horas.', r:'f7', rl:'CDC 2024'}
+  ];
+  var mbox = document.getElementById('myths'), answered = 0, mCorrect = 0, mScore = document.getElementById('mythScore');
+  myths.forEach(function(m, i){
+    var el = document.createElement('article');
+    el.className = 'myth reveal';
+    el.innerHTML = '<span class="n">' + (i+1) + '</span><p class="stmt">' + m.t + '</p>' +
+      '<div class="choices" role="group" aria-label="Elige mito o realidad">' +
+      '<button type="button" class="choice" id="m' + i + 'm" data-v="mito">Mito</button>' +
+      '<button type="button" class="choice" id="m' + i + 'r" data-v="realidad">Realidad</button></div>';
+    el.querySelectorAll('.choice').forEach(function(b){
+      b.addEventListener('click', function(){
+        var ok = b.dataset.v === m.a;
+        el.querySelectorAll('.choice').forEach(function(x){ x.disabled = true; });
+        b.classList.add('picked');
+        var ans = document.createElement('div');
+        ans.className = 'answer ' + (ok ? 'ok' : 'no');
+        ans.setAttribute('role','status');
+        ans.innerHTML = '<span class="verdict">' + (ok ? '¡Correcto! ' : 'No exactamente. ') + 'Es ' + (m.a === 'mito' ? 'un mito.' : 'una realidad.') + '</span><span>' + m.e + ' <a class="ref" href="#' + m.r + '">' + m.rl + '</a></span>';
+        el.appendChild(ans);
+        answered++; if (ok) mCorrect++;
+        mScore.textContent = answered < myths.length ? answered + ' de 5 respondidas' : '¡Listo! Acertaste ' + mCorrect + ' de 5.';
+      });
+    });
+    mbox.appendChild(el);
+  });
+
+  /* ---- Quiz ---- */
+  var qs = [
+    {q:'¿Hasta qué edad aproximada siguen madurando las zonas del cerebro que controlan el juicio y la toma de decisiones?',
+     o:['Hasta los 12 años','Hasta los 16 años','Hasta el comienzo o la mitad de los 20 años','No cambian después de nacer'], c:2,
+     e:'Según NIDA, estas zonas maduran hasta el comienzo o la mitad de los 20 años.'},
+    {q:'Según la CDC, ¿cuántas horas de sueño necesitan los adolescentes de 13 a 17 años?',
+     o:['5 a 6 horas','6 a 7 horas','8 a 10 horas','12 horas o más'], c:2,
+     e:'La CDC recomienda de 8 a 10 horas para adolescentes de 13 a 17 años.'},
+    {q:'En el estudio escolar de SENDA 2023, ¿qué porcentaje de estudiantes consumió alcohol en el último mes?',
+     o:['5 %','22,7 %','50 %','75 %'], c:1,
+     e:'Fue 22,7 %, menos que el 24,0 % de 2021. La mayoría de los escolares no consumió alcohol ese mes.'},
+    {q:'La nicotina de los vapeadores puede dañar las partes del cerebro adolescente que controlan…',
+     o:['Solo el sentido del olfato','La atención, el aprendizaje, el ánimo y el control de impulsos','Únicamente la fuerza muscular','Nada; el vapor es inofensivo'], c:1,
+     e:'La CDC señala que la nicotina puede dañar las zonas que controlan la atención, el aprendizaje, el ánimo y el control de impulsos.'},
+    {q:'La CDC encontró que los estudiantes con notas más bajas reportan más consumo de alcohol. ¿Qué podemos concluir?',
+     o:['Que el alcohol es la única causa de las notas bajas','Que hay una relación entre ambas cosas, pero eso solo no prueba cuál causa cuál','Que las notas no tienen ninguna relación con la salud','Que todos los estudiantes con notas bajas consumen alcohol'], c:1,
+     e:'Es una asociación. La propia CDC indica que se necesita más investigación para saber si una cosa causa la otra o si otros factores influyen en ambas.'}
+  ];
+  var holder = document.getElementById('quizQs'), letters = ['A','B','C','D'];
+  holder.style.display = 'grid'; holder.style.gap = '16px';
+  qs.forEach(function(q, i){
+    var fs = document.createElement('fieldset');
+    fs.className = 'q reveal'; fs.id = 'q' + i;
+    var h = '<legend><span>' + (i+1) + '/5</span>' + q.q + '</legend><div class="opts">';
+    q.o.forEach(function(o, j){
+      h += '<div class="opt"><input type="radio" name="q' + i + '" id="q' + i + 'o' + j + '" value="' + j + '"><label for="q' + i + 'o' + j + '"><b>' + letters[j] + '.</b> ' + o + '</label></div>';
+    });
+    fs.innerHTML = h + '</div>';
+    holder.appendChild(fs);
+  });
+  var form = document.getElementById('quizForm'), res = document.getElementById('quizResult'),
+      msg = document.getElementById('quizMsg'), reset = document.getElementById('quizReset'), submit = document.getElementById('quizSubmit');
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var picks = qs.map(function(q, i){ var c = form.querySelector('input[name=q' + i + ']:checked'); return c ? +c.value : -1; });
+    var missing = picks.indexOf(-1);
+    if (missing > -1) { msg.textContent = 'Te falta responder la pregunta ' + (missing+1) + '.'; document.getElementById('q' + missing).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'}); return; }
+    msg.textContent = '';
+    var score = 0;
+    qs.forEach(function(q, i){
+      var fs = document.getElementById('q' + i); fs.classList.add('graded');
+      fs.querySelectorAll('input').forEach(function(inp){ inp.disabled = true; });
+      var opts = fs.querySelectorAll('.opt');
+      opts[q.c].classList.add('correct');
+      var ex = document.createElement('p'); ex.className = 'explain';
+      if (picks[i] === q.c) { score++; ex.classList.add('good'); ex.innerHTML = '<strong>Correcto.</strong> ' + q.e; }
+      else { opts[picks[i]].classList.add('wrong'); ex.innerHTML = '<strong>La respuesta correcta es ' + letters[q.c] + '.</strong> ' + q.e; }
+      fs.appendChild(ex);
+    });
+    var txt = score === 5 ? '¡Excelente! Dominas la información de esta página.' : score >= 3 ? 'Muy bien. Revisa las explicaciones de las preguntas marcadas en rojo.' : 'Buen intento. Lee las explicaciones y vuelve a revisar las secciones de la página.';
+    res.innerHTML = '<span class="score">' + score + '/5</span><div><h3 style="margin-bottom:6px">Tu puntaje</h3><p>' + txt + '</p></div>';
+    res.hidden = false; reset.hidden = false; submit.hidden = true;
+    res.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
+  });
+  reset.addEventListener('click', function(){
+    form.reset(); res.hidden = true; reset.hidden = true; submit.hidden = false; msg.textContent = '';
+    qs.forEach(function(q, i){
+      var fs = document.getElementById('q' + i); fs.classList.remove('graded');
+      fs.querySelectorAll('input').forEach(function(inp){ inp.disabled = false; });
+      fs.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('correct','wrong'); });
+      var ex = fs.querySelector('.explain'); if (ex) ex.remove();
+    });
+    document.getElementById('q0').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
+  });
+})();
+</script>
+
+</body>
+</html>
